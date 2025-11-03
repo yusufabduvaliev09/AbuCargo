@@ -1,27 +1,24 @@
 <!doctype html>
-<html lang="ru">
+<html>
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Вход — ABU Cargo</title>
   <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
   <main class="container center">
-    <section class="card auth-card">
+    <div class="card auth-card">
       <h2>Вход</h2>
-      <% if(error){ %>
-        <div class="alert"><%= error %></div>
-      <% } %>
+      <% if(error){ %><div class="alert"><%= error %></div><% } %>
       <form method="post" action="/login">
         <label>Имя пользователя</label>
-        <input name="username" required placeholder="admin" />
+        <input name="username" required />
         <label>Пароль</label>
         <input name="password" type="password" required />
-        <button class="btn">Войти</button>
+        <button class="btn" type="submit">Войти</button>
       </form>
-      <p>Учётка admin создана при инициализации (пароль <strong>admin123</strong>) — поменяйте пароль после входа.</p>
-    </section>
+      <p>Нет аккаунта? <a href="/register">Регистрация</a></p>
+    </div>
   </main>
 </body>
 </html>
