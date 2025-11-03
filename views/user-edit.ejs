@@ -1,21 +1,12 @@
 <!doctype html>
-<html lang="ru">
+<html>
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title><%= target ? 'Редактировать' : 'Новый' %> пользователь</title>
   <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
-  <nav class="nav">
-    <div class="container">
-      <a class="brand" href="/dashboard">ABU Cargo</a>
-      <div class="nav-right">
-        <span><strong><%= user.username %></strong> (<%= user.role %>)</span>
-      </div>
-    </div>
-  </nav>
-
+  <nav class="nav"><div class="container"><a class="brand" href="/dashboard">ABU Cargo</a></div></nav>
   <main class="container">
     <div class="card">
       <h2><%= target ? 'Редактировать' : 'Добавить' %> пользователя</h2>
