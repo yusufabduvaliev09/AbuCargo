@@ -1,0 +1,38 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>Настройки — ABU Cargo</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <nav class="nav"><div class="container"><a class="brand" href="/dashboard">ABU Cargo</a></div></nav>
+  <main class="container">
+    <div class="card">
+      <h2>Настройки сайта</h2>
+      <% if(message){ %><div class="alert"><%= message %></div><% } %>
+      <form method="post" action="/dashboard/settings">
+        <label>Название компании</label>
+        <input name="company_name" value="<%= settings.company_name || '' %>" />
+        <label>Телефон</label>
+        <input name="phone" value="<%= settings.phone || '' %>" />
+        <label>Email</label>
+        <input name="email" value="<%= settings.email || '' %>" />
+        <label>Валюта</label>
+        <input name="currency" value="<%= settings.currency || '' %>" />
+        <label>Язык</label>
+        <input name="language" value="<%= settings.language || '' %>" />
+        <label>Тема (light/dark)</label>
+        <input name="theme" value="<%= settings.theme || 'light' %>" />
+        <label>Адрес</label>
+        <input name="address" value="<%= settings.address || '' %>" />
+        <label>Описание</label>
+        <textarea name="description"><%= settings.description || '' %></textarea>
+        <label>URL логотипа</label>
+        <input name="logo_url" value="<%= settings.logo_url || '' %>" />
+        <button class="btn" type="submit">Сохранить</button>
+      </form>
+    </div>
+  </main>
+</body>
+</html>
