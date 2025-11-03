@@ -1,8 +1,7 @@
 <!doctype html>
-<html lang="ru">
+<html>
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Пользователи — ABU Cargo</title>
   <link rel="stylesheet" href="/css/style.css">
 </head>
@@ -12,7 +11,7 @@
       <a class="brand" href="/dashboard">ABU Cargo</a>
       <div class="nav-right">
         <span><strong><%= user.username %></strong> (<%= user.role %>)</span>
-        <a href="/roles">Роли</a>
+        <a href="/dashboard/settings">Настройки</a>
         <form method="post" action="/logout" style="display:inline;">
           <button class="btn-link" type="submit">Выйти</button>
         </form>
@@ -27,22 +26,22 @@
       <table class="table">
         <thead><tr><th>ID</th><th>Имя</th><th>Тел</th><th>Роль</th><th>Действия</th></tr></thead>
         <tbody>
-        <% users.forEach(u => { %>
-          <tr>
-            <td><%= u.id %></td>
-            <td><%= u.username %></td>
-            <td><%= u.phone %></td>
-            <td><%= u.role %></td>
-            <td>
-              <a href="/dashboard/users/<%= u.id %>/edit">Ред.</a>
-              <% if(user.role === 'admin'){ %>
-                <form method="post" action="/dashboard/users/<%= u.id %>/delete" style="display:inline;">
-                  <button class="btn-link" type="submit" onclick="return confirm('Удалить?');">Удал.</button>
-                </form>
-              <% } %>
-            </td>
-          </tr>
-        <% }) %>
+          <% users.forEach(u => { %>
+            <tr>
+              <td><%= u.id %></td>
+              <td><%= u.username %></td>
+              <td><%= u.phone %></td>
+              <td><%= u.role %></td>
+              <td>
+                <a href="/dashboard/users/<%= u.id %>/edit">Ред.</a>
+                <% if(user.role === 'admin'){ %>
+                  <form method="post" action="/dashboard/users/<%= u.id %>/delete" style="display:inline;">
+                    <button class="btn-link" type="submit" onclick="return confirm('Удалить?');">Удал.</button>
+                  </form>
+                <% } %>
+              </td>
+            </tr>
+          <% }) %>
         </tbody>
       </table>
     </div>
