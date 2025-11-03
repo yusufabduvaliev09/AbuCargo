@@ -12,8 +12,49 @@ const fs = require('fs');
 
 const app = express();
 const dbFile = path.join(__dirname, 'data', 'db.sqlite');
-if (!fs.existsSync(dbFile)) {
-  console.error('Database missing. Run: npm run init-db');
+const dir = path.dirname(dbFile);
+if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
+const dbExists = fs.existsSync(dbFile);
+const db = new sqlite3.Database(dbFile);
+
+// если база новая — создаем таблицы автоматически
+if (!dbExists) {
+  console.log('Создаётся новая база данных...');
+  db.serialize(() => {
+    db.run(`CREATE TABLE IF NOT EXISTS users (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      username TEXT UNIQUE,
+      phone TEXT,
+      password_hash TEXT,
+      role TEXT,
+      created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+    );`);
+    db.run(`CREATE TABLE IF NOT EXISTS roles (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      name TEXT UNIQUE,
+      description TEXT
+    );`);
+    db.run(`CREATE TABLE IF NOT EXISTS settings (
+      id INTEGER PRIMARY KEY CHECK (id = 1),
+      company_name TEXT,
+      phone TEXT,
+      email TEXT,
+      currency TEXT,
+      language TEXT,
+      theme TEXT,
+      address TEXT,
+      description TEXT,
+      logo_url TEXT
+    );`);
+    db.run(`INSERT OR IGNORE INTO roles (name, description) VALUES ('admin', 'Administrator'), ('manager','Manager'), ('user','User');`);
+    db.run(`INSERT OR IGNORE INTO settings (id, company_name, phone, email, currency, language, theme, address, description, logo_url)
+      VALUES (1, 'ABU Cargo', '+996000000000', 'info@abucargo.example', 'KGS', 'ru', 'light', '', 'ABU Cargo service', '');`);
+    const bcrypt = require('bcryptjs');
+    const hash = bcrypt.hashSync('admin123', 10);
+    db.run(`INSERT OR IGNORE INTO users (username, phone, password_hash, role) VALUES ('admin', '+996000000000', ?, 'admin');`, [hash]);
+    console.log('База успешно создана (admin / admin123)');
+  });
+}
   // continue — init instruction shown. Render will fail unless db exists or init was run.
 }
 
