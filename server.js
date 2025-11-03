@@ -56,7 +56,7 @@ if (!dbExists) {
   });
 }
   // continue — init instruction shown. Render will fail unless db exists or init was run.
-}
+
 
 const db = new sqlite3.Database(dbFile);
 const dbRun = promisify(db.run.bind(db));
