@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title><%= target ? 'Редактировать' : 'Новый' %> пользователь</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <nav class="nav">
+    <div class="container">
+      <a class="brand" href="/dashboard">ABU Cargo</a>
+      <div class="nav-right">
+        <span><strong><%= user.username %></strong> (<%= user.role %>)</span>
+      </div>
+    </div>
+  </nav>
+
+  <main class="container">
+    <div class="card">
+      <h2><%= target ? 'Редактировать' : 'Добавить' %> пользователя</h2>
+      <form method="post" action="<%= target ? ('/dashboard/users/' + target.id) : '/dashboard/users' %>">
+        <label>Имя пользователя</label>
+        <input name="username" value="<%= target ? target.username : '' %>" required />
+        <label>Телефон</label>
+        <input name="phone" value="<%= target ? target.phone : '' %>" />
+        <label>Пароль <small>(оставить пустым чтобы не менять)</small></label>
+        <input name="password" type="password" />
+        <label>Роль</label>
+        <select name="role">
+          <% roles.forEach(r => { %>
+            <option value="<%= r %>" <%= target && target.role === r ? 'selected' : '' %>><%= r %></option>
+          <% }) %>
+        </select>
+        <button class="btn" type="submit">Сохранить</button>
+      </form>
+    </div>
+  </main>
+</body>
+</html>
