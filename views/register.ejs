@@ -1,0 +1,26 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>Регистрация — ABU Cargo</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <main class="container center">
+    <div class="card auth-card">
+      <h2>Регистрация</h2>
+      <% if(error){ %><div class="alert"><%= error %></div><% } %>
+      <form method="post" action="/register">
+        <label>Имя пользователя</label>
+        <input name="username" required />
+        <label>Телефон</label>
+        <input name="phone" />
+        <label>Пароль</label>
+        <input name="password" type="password" required />
+        <button class="btn" type="submit">Зарегистрироваться</button>
+      </form>
+      <p>Уже есть аккаунт? <a href="/login">Войти</a></p>
+    </div>
+  </main>
+</body>
+</html>
