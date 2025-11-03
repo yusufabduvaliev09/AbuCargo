@@ -1,4 +1,3 @@
-/* public/css/style.css - минимальная стилизация */
 :root{ --bg:#f4f6f8; --accent:#169925; --muted:#666; }
 *{box-sizing:border-box}
 body{ font-family:Inter, Roboto, Arial, sans-serif; background:var(--bg); color:#222; margin:0; padding:0; }
@@ -12,7 +11,7 @@ body{ font-family:Inter, Roboto, Arial, sans-serif; background:var(--bg); color:
 .card{ background:#fff; padding:16px; border-radius:10px; box-shadow:0 6px 20px rgba(0,0,0,0.04); }
 .auth-card{ width:360px; margin:60px auto; }
 .alert{ background:#ffecec; color:#900; padding:8px; border-radius:6px; margin-bottom:8px; }
-input, select { width:100%; padding:8px 10px; border:1px solid #ddd; border-radius:8px; margin:8px 0 12px; }
+input, select, textarea { width:100%; padding:8px 10px; border:1px solid #ddd; border-radius:8px; margin:8px 0 12px; }
 .table { width:100%; border-collapse:collapse; margin-top:8px; }
 .table th, .table td { text-align:left; padding:8px 6px; border-bottom:1px solid #f0f0f0; }
 .center{ display:flex; align-items:center; justify-content:center; min-height:80vh; }
