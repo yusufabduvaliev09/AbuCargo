@@ -1,19 +1,19 @@
 <!doctype html>
-<html lang="ru">
+<html>
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Панель — ABU Cargo</title>
   <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
   <nav class="nav">
     <div class="container">
-      <a class="brand" href="/dashboard">ABU Cargo</a>
+      <a class="brand" href="/dashboard"><%= settings.company_name || 'ABU Cargo' %></a>
       <div class="nav-right">
         <span><strong><%= user.username %></strong> (<%= user.role %>)</span>
         <a href="/dashboard/users">Пользователи</a>
         <a href="/roles">Роли</a>
+        <a href="/dashboard/settings">Настройки</a>
         <form method="post" action="/logout" style="display:inline;">
           <button class="btn-link" type="submit">Выйти</button>
         </form>
@@ -24,8 +24,9 @@
   <main class="container">
     <div class="card">
       <h1>Добро пожаловать, <%= user.username %>!</h1>
-      <p>Это упрощённая статическая панель. Добавь свои виджеты здесь.</p>
-      <p><a class="btn" href="/dashboard/users">Управление пользователями</a></p>
+      <p>Компания: <strong><%= settings.company_name %></strong></p>
+      <p>Телефон: <%= settings.phone %></p>
+      <p>Email: <%= settings.email %></p>
     </div>
   </main>
 </body>
